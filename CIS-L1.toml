@@ -1,0 +1,124 @@
+name = "rhel9-guest00"
+description = "Blueprint for a CIS Level 1 compliant Red Hat Enterprise Linux 9 System build."
+version = "0.0.24"
+modules = []
+groups = []
+distro = "rhel-9.5"
+
+[[packages]]
+name = "ansible-collection-redhat-rhel_mgmt"
+version = "*"
+
+[[packages]]
+name = "ansible-core"
+version = "*"
+
+[[packages]]
+name = "net-tools"
+version = "*"
+
+[[packages]]
+name = "openscap-scanner"
+version = "*"
+
+[[packages]]
+name = "rhel-system-roles"
+
+[[packages]]
+name = "scap-security-guide"
+
+[[packages]]
+name = "setroubleshoot"
+
+[[packages]]
+name = "vim-enhanced"
+
+[[packages]]
+name = "sudo"
+version = "*"
+
+[[packages]]
+name = "libpwquality"
+version = "*"
+
+[[packages]]
+name = "systemd-journal-remote"
+version = "*"
+
+[[packages]]
+name = "firewalld"
+version = "*"
+
+[[packages]]
+name = "nftables"
+version = "*"
+
+[[packages]]
+name = "libselinux"
+version = "*"
+
+[[packages]]
+name = "chrony"
+version = "*"
+
+[[packages]]
+name = "audit-libs"
+version = "*"
+
+[[packages]]
+name = "audit"
+version = "*"
+
+[customizations]
+hostname = "localhost"
+
+[[customizations.filesystem]]
+mountpoint = "/"
+minsize = 26843545600
+
+[[customizations.filesystem]]
+mountpoint = "/tmp"
+minsize = 4294967296
+
+[[customizations.filesystem]]
+mountpoint = "/home"
+minsize = 21474836480
+
+[[customizations.filesystem]]
+mountpoint = "/var"
+minsize = 644245094400
+
+[[customizations.filesystem]]
+mountpoint = "/var/log"
+minsize = 1073741824
+
+[[customizations.filesystem]]
+mountpoint = "/var/log/audit"
+minsize = 10737418240
+
+[[customizations.filesystem]]
+mountpoint = "/var/tmp"
+minsize = 1073741824
+
+[customizations.kernel]
+append = "audit_backlog_limit=8192 audit=1"
+
+[[customizations.user]]
+name = "admin"
+description = "Administrator"
+password = "$6$skMsN2VVuSw1y1fw$5PJOJNieWK.TGzT9lew8ROQ//6h2cRt5Kfx/iih4fRIfjUDOL2E1cxOwaja.S7B5T7htXvp6r3iICTA1gpRDx/"
+key = "AAAAB3NzaC1yc2EAAAADAQABAAABAQDODIKms6GQhe/je6+UPbOIL00XSHwis6xQCAFi+OI8LtQXL7S3UXYuar2caoWk4Sm1+d+NUtv3PeGgyada4kaBI2QEFgcU+D4OIOG5opeqaBpvIlgwiBHPZzuGByNPk7Ev2clL0WD7hAA9ONurz7IjxGJtYrEHDmtwewWD1wVHUrc40wJRMZoO60JUH6iz8/IA2g2GUZqWj1F2MBjb7pTPj4RiJlnN4V20buZN5F11e1QxuoqQk+9O3n/6NUPnoi0Dnx/3nLPUNwuI8aPxsCJO9CLSUBKzTUlOjhwoF0mg7fixDKM++zvTH55CaEXnD1M7znhfP1JWGBUcBxEcbVKv"
+home = "/home/admin"
+shell = "/bin/bash"
+groups = ["users", "wheel"]
+
+[customizations.locale]
+keyboard = "us-mac"
+
+[customizations.services]
+enabled = ["auditd", "crond", "firewalld", "systemd-journald"]
+masked = ["cups", "nfs-server", "rpcbind", "avahi-daemon", "autofs", "bluetooth", "nftables"]
+
+[customizations.openscap]
+datastream = "/usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml"
+profile_id = "xccdf_org.ssgproject.content_profile_cis_server_l1"
