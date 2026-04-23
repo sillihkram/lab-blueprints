@@ -72,33 +72,35 @@ version = "*"
 [customizations]
 hostname = "localhost"
 
+# --- 100 GiB CIS partition layout ---
+
 [[customizations.filesystem]]
 mountpoint = "/"
-minsize = 26843545600
+minsize = 26843545600   # 25 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/tmp"
-minsize = 4294967296
+minsize = 8589934592    # 8 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/home"
-minsize = 21474836480
+minsize = 10737418240   # 10 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/var"
-minsize = 644245094400
+minsize = 37580963840    # 35 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/var/log"
-minsize = 1073741824
+minsize = 8589934592    # 8 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/var/log/audit"
-minsize = 10737418240
+minsize = 8589934592    # 8 GiB
 
 [[customizations.filesystem]]
 mountpoint = "/var/tmp"
-minsize = 1073741824
+minsize = 6442450944    # 6 GiB
 
 [customizations.kernel]
 append = "audit_backlog_limit=8192 audit=1"
